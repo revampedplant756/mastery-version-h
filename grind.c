@@ -31,7 +31,7 @@ grind_state_t grind(struct Parser* parser) {
             struct grind_elem* itr = allocs[hash(parser->index)];
             struct grind_elem* prev = NULL;
             bool freed = false;
-            while (itr != NULL && !freed) {
+            while (itr != NULL) {
                 if (itr->index == parser->index) {
                     if (prev == NULL) {
                         allocs[hash(parser->index)] = itr->next;
@@ -40,8 +40,10 @@ grind_state_t grind(struct Parser* parser) {
                     }
                     free_grind_elem(&itr);
                     freed = true;
+                    break;
                 }
                 prev = itr;
+                itr = itr->next;
             }
             if (!freed) {
                 return GRIND_BAD_FREE;

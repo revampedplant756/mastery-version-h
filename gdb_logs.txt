@@ -1,0 +1,6 @@
+    1  b grind.c:52
+    2  r -t ./testcases/short2.rep
+    3  q
+    4  set logging file gdb_logs.txt
+    5  set logging on
+    6  show commands
